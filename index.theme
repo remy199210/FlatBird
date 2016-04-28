@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=FlatBird
+Comment=A modern light and flt theme for unity(gnome)
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=FlatBird
+MetacityTheme=FlatBird
+CursorTheme=DMZ-Black
+ButtonLayout=:minimize,maximize,close
