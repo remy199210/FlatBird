@@ -1,0 +1,62 @@
+#!/bin/bash
+THEME="FlatBird"
+ICONS="SuperFlat-Light"
+DIR_THEME="$HOME/.themes/FlatBird/"
+DIR_ICONS="$HOME/.icons/SuperFlatLight/"
+REPO="https://github.com/remy199210/"
+
+if [[ $# -gt 0 ]]; then
+	#UPDATER
+	if [[ $1 = "update" ]]; then
+		#UPDATE THEME
+		if [[ -d  "$DIR_THEME" ]]; then
+			cd "$DIR_THEME" && git pull
+			echo -e ">>>> $THEME updated.\n"
+		else
+			echo "$THEME is not installed."
+		fi
+		#UPDATE ICONS
+		if [[ -d  "$DIR_ICONS" ]]; then
+			cd "$DIR_ICONS" && git pull
+			echo -e ">>>> $ICONS updated.\n"
+		else
+			echo "$ICONS is not installed."
+		fi
+	#UNINSTALLER
+	elif [[ $1 = "remove" ]]; then
+		#UNINSTALL THEME
+		if [[ -d  "$DIR_THEME" ]]; then
+			rm -rf "$DIR_THEME"
+			echo -e ">>>> $THEME removed.\n"
+		fi
+		#UNINSTALL ICONS
+		if [[ -d  "$DIR_ICONS" ]]; then
+			rm -rf "$DIR_ICONS"
+			echo -e ">>>> $ICONS removed.\n"
+		fi
+	fi
+#INSTALLER
+else
+	#INSTALL THEME
+	if [[ -d  "$DIR_THEME" ]]; then
+		echo -e "> $THEME already exists. $THEME has not been installed\n"
+	else
+		git clone "$REPO$THEME" "$DIR_THEME"
+		echo -e ">>>> $THEME installed.\n"
+	fi
+	#INSTALL ICONS
+	if [[ -d  "$DIR_ICONS" ]]; then
+		echo -e "$ICONS already exists. $ICONS has not been installed\n"
+	else
+		git clone "$REPO$ICONS" "$DIR_ICONS"
+		echo -e ">>>> $ICONS installed.\n"
+	fi
+	#CHECK UNITY-TWEAK-TOOL
+	if [[ -e "/usr/bin/unity-tweak-tool" ]]; then
+		unity-tweak-tool&
+	else
+		echo "unity-tweak-tool has not been found !"
+		echo "install it with : sudo apt-get install unity-tweak-tool"
+		echo "Then run it and change icons & theme to enjoy your brand new Flat Design"
+	fi
+fi
